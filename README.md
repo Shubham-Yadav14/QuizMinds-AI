@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QuizMind AI 🧠⚡  
+### Multi-Model AI Quiz Answering Platform
 
-## Getting Started
+QuizFusion AI is a **full-stack AI-powered quiz answering web application** that allows users to instantly get **accurate, crisp answers** to quiz and exam questions by querying **multiple Large Language Models (LLMs) in parallel**.
 
-First, run the development server:
+The platform is designed as a **resume-grade AI system**, focusing on **AI orchestration, prompt engineering, and scalable backend architecture**, rather than just a simple chatbot.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 💬 **Chat-based quiz interface** (similar to ChatGPT)
+- 🎯 **Subject-based contextual fine-tuning** (DBMS, DSA, OS, CN, SQL, etc.)
+- 🤖 **Multi-model AI orchestration**
+  - OpenAI (free-tier models)
+  - Google Gemini (free-tier)
+  - DeepSeek (via OpenRouter)
+- ⚡ **Parallel AI requests** for faster responses
+- 🧠 **Smart MCQ detection**
+  - If options are present → returns **only the correct option**
+  - If no options → returns a **crisp, direct answer**
+- 🧩 **Model-wise response comparison**
+- ❌ No authentication
+- ❌ No database
+- ❌ No user tracking
+- ✅ Fully stateless and session-based
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🏗️ System Architecture
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
