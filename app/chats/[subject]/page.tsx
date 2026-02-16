@@ -71,8 +71,8 @@ export default function page() {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      <div className="flex-1 overflow-y-auto pb-32">
-        <div className="max-w-4xl mx-auto px-4 py-6 space-y-6">
+      <div className="flex-1 overflow-y-auto pb-40 sm:pb-44">
+        <div className="w-full mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6 max-w-4xl">
           {messages.map((message: MessageType) => (
             <ChatMessage key={message.id} message={message} />
           ))}
