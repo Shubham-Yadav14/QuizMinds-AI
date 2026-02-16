@@ -27,5 +27,3 @@ The platform is designed as a **resume-grade AI system**, focusing on **AI orche
 
 ---
 
-## 🏗️ System Architecture
-
