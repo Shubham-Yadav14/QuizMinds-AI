@@ -1,6 +1,9 @@
 # QuizMind AI 🧠⚡  
 ### Multi-Model AI Quiz Answering Platform
 
+[Visit Website](https://quizminds-ai.onrender.com)
+
+
 QuizFusion AI is a **full-stack AI-powered quiz answering web application** that allows users to instantly get **accurate, crisp answers** to quiz and exam questions by querying **multiple Large Language Models (LLMs) in parallel**.
 
 The platform is designed as a **resume-grade AI system**, focusing on **AI orchestration, prompt engineering, and scalable backend architecture**, rather than just a simple chatbot.
