@@ -33,7 +33,6 @@ function Input({input,setInput,isLoading,handleSubmit,inputRef}:InputProps) {
                 placeholder="Paste your quiz question here..."
                 rows={1}
                 className="flex-1 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none min-h-[44px] sm:min-h-[48px] max-h-32"
-                disabled={isLoading}
               />
               <button
                 onClick={handleSubmit}

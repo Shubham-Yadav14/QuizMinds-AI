@@ -16,11 +16,13 @@ const MessageContext = createContext<MessageContextType | undefined>(undefined);
 export const MessageProvider = ({ children }: { children: ReactNode }) => {
   const {subject} = useParams() as {subject:string};
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const chat= subject?.split("-")
-    .map(
-      word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-    )
-    .join(" ");;
+  const chat= subject
+    ? decodeURIComponent(subject).split("-")
+      .map(
+        word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      )
+      .join(" ")
+    : "";
 
   useEffect(() => {
     setMessages([
@@ -28,7 +30,7 @@ export const MessageProvider = ({ children }: { children: ReactNode }) => {
         id: "welcome",
         type: "ai",
         content: `Ready to answer questions about **${chat}**. Paste your quiz question below!`,
-        timestamp: new Date(),
+        modal:""
       }
     ])
   }, [chat])

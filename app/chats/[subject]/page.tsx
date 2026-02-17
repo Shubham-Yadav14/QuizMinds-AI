@@ -27,45 +27,87 @@ export default function page() {
   }, [messages]);
 
   const handleSubmit = async () => {
-    if (!input.trim() || isLoading) return;
+  if (!input.trim() || isLoading) return;
 
-    const userMessage: MessageType = {
-      id: `user-${Date.now()}`,
-      type: "user",
-      content: input.trim(),
-      timestamp: new Date(),
-    };
-
-    setMessages((prevData: MessageType[]) => [...prevData, userMessage]);
-    setInput("");
-    setIsLoading(true);
-
-    try {
-      const result = await ChatServices.AskQuiz(chat, input);
-      if(result.gemini && result.openai){
-        setMessages((prevData) => [
-        ...prevData,
-        {
-          id: input,
-          type: "ai",
-          content: "",
-          responses: {
-            gemini: { answer: result.gemini.answer },
-            openai: { answer: result.openai.answer },
-          },
-          timestamp: new Date(),
-        },
-      ]);
-      }
-      
-
-    } catch (error: any) {
-      console.log("Error fetching question response", error);
-    } finally {
-      setIsLoading(false);
-      inputRef.current?.focus();
-    }
+  const userMessage: MessageType = {
+    id: `user-${Date.now()}`,
+    type: "user",
+    content: input.trim(),
   };
+
+  const prevInput = input;
+  const timestamp = Date.now();
+
+  setInput("");
+  setIsLoading(true);
+
+  // Create message IDs for each model
+  const aiMessageIds: Record<string, string> = {
+    openai: `ai-openai-${timestamp}`,
+    gemini: `ai-gemini-${timestamp}`,
+  };
+
+  const createAiMessage = (modal: string): MessageType => ({
+    id: aiMessageIds[modal],
+    type: "ai",
+    content: "",
+    modal: modal,
+    error: undefined,
+  });
+
+  // Create all messages at once (user + both AI models)
+  setMessages((prev) => [
+    ...prev,
+    userMessage,
+    createAiMessage("openai"),
+    createAiMessage("gemini"),
+  ]);
+
+  try {
+    await ChatServices.AnswerStream(chat, prevInput, (data: any) => {
+      const { event, model, answer, error } = data;
+
+      if (event === "done") {
+        setIsLoading(false);
+        inputRef.current?.focus();
+        return;
+      }
+
+      // Update the specific model's message
+      if (event === "openai" || event === "gemini") {
+        setMessages((prevMessages) => {
+          return prevMessages.map((msg) => {
+            if (msg.id !== aiMessageIds[event]) return msg;
+
+            return {
+              ...msg,
+              content: answer ?? msg.content,
+              error: error ?? msg.error,
+            };
+          });
+        });
+      }
+    });
+  } catch (err: any) {
+    console.error("Error:", err);
+    setIsLoading(false);
+
+    const errorMsg = err.message || "An error occurred while processing your request";
+    setMessages((prevMessages) =>
+      prevMessages.map((msg) => {
+        if (msg.id === aiMessageIds.openai || msg.id === aiMessageIds.gemini) {
+          return {
+            ...msg,
+            error: errorMsg,
+          };
+        }
+        return msg;
+      })
+    );
+
+    inputRef.current?.focus();
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -76,16 +118,6 @@ export default function page() {
           {messages.map((message: MessageType) => (
             <ChatMessage key={message.id} message={message} />
           ))}
-          {isLoading && (
-            <div className="flex gap-3 animate-fade-in">
-              <div className="glass-card p-4 rounded-2xl">
-                <div className="flex items-center gap-3">
-                  <Loader2 className="w-5 h-5 text-primary animate-spin" />
-                  <span className="text-muted-foreground text-sm">Querying AI models...</span>
-                </div>
-              </div>
-            </div>
-          )}
           <div ref={messagesEndRef} />
         </div>
       </div>

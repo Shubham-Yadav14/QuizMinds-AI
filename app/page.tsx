@@ -6,17 +6,18 @@ import { useState } from "react";
 
 
 const POPULAR_SUBJECTS: string[] = [
-  "DSA",
-  "DBMS",
-  "Operating Systems",
-  "Computer Networks",
-  "Java",
-  "Python",
-  "React",
-  "SQL",
-  "Aptitude",
-  "Machine Learning",
+  "Technology & Programming",
+  "Artificial Intelligence & Data",
+  "Mathematics & Statistics",
+  "Science",
+  "Business & Economics",
+  "Aptitude & Reasoning",
+  "Humanities & Social Sciences",
+  "Career & Interview Preparation",
+  "Design & Creativity",
+  "General Knowledge",
 ];
+
 
 export default function Home() {
   const router = useRouter();

@@ -16,24 +16,17 @@ const ChatMessage = ({ message }: MessageProps) => {
     );
   }
 
-  if (message.responses) {
+  if (message.type === "ai" && message.modal) {
     return (
       <div className="space-y-3 animate-fade-in">
         <ModelCard
-          modelName="Gemini"
+          modelName={message.modal}
           icon={<Sparkles className="w-4 h-4" />}
-          answer={message.responses.gemini.answer}
-          error={message.responses.gemini.error}
-          variant="gemini"
+          answer={message.content}
+          error={message.error}
+          variant={message.modal}
         />
         
-        <ModelCard
-          modelName="GPT-5"
-          icon={<Cpu className="w-4 h-4" />}
-          answer={message.responses.openai.answer}
-          error={message.responses.openai.error}
-          variant="openai"
-        />
       </div>
     );
   }
@@ -62,8 +55,16 @@ interface ModelCardProps {
   icon: React.ReactNode;
   answer: string;
   error?: string;
-  variant: "gemini" | "openai";
+  variant: string;
 }
+
+const SkeletonLoader = () => (
+  <div className="space-y-2">
+    <div className="h-3 bg-gradient-to-r from-background/50 to-background/30 rounded animate-pulse"></div>
+    <div className="h-3 bg-gradient-to-r from-background/50 to-background/30 rounded animate-pulse"></div>
+    <div className="h-3 bg-gradient-to-r from-background/40 to-background/20 rounded animate-pulse w-3/4"></div>
+  </div>
+);
 
 const ModelCard = ({ modelName, icon, answer, error, variant }: ModelCardProps) => {
   const cardClass = variant === "gemini" ? "model-card-gemini" : "model-card-openai";
@@ -90,6 +91,10 @@ const ModelCard = ({ modelName, icon, answer, error, variant }: ModelCardProps) 
         <div className="flex items-center gap-2 text-destructive">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           <span className="text-xs sm:text-sm break-words">{error}</span>
+        </div>
+      ) : answer === "" ? (
+        <div className="font-mono text-xs sm:text-sm md:text-base text-foreground bg-background/50 rounded-lg p-2 sm:p-3 overflow-x-auto">
+          <SkeletonLoader />
         </div>
       ) : (
         <div className="font-mono text-xs sm:text-sm md:text-base text-foreground bg-background/50 rounded-lg p-2 sm:p-3 overflow-x-auto">

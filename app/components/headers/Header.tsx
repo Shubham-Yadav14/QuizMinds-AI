@@ -6,7 +6,7 @@ export default function Header() {
     const router = useRouter();
     const { subject } = useParams() as {subject:string};
     const chat = subject
-  ? subject.replace(/-/g, " ")
+  ? decodeURIComponent(subject).replace(/-/g, " ")
   : "";
 
 
