@@ -85,7 +85,7 @@ export default function Home() {
               <button
                 onClick={handleStart}
                 disabled={!subject.trim()}
-                className="btn-primary-glow px-4 sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base text-primary-foreground font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex items-center gap-1 sm:gap-2 flex-shrink-0"
+                className="btn-primary-glow px-4 cursor-pointer sm:px-6 py-3 sm:py-4 rounded-lg sm:rounded-xl text-xs sm:text-sm md:text-base text-primary-foreground font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex items-center gap-1 sm:gap-2 flex-shrink-0"
               >
                 <span className="hidden sm:inline">Start</span>
                 <span className="sm:hidden">Go</span>
@@ -104,7 +104,7 @@ export default function Home() {
                 <button
                   key={s}
                   onClick={() => handleSubjectClick(s)}
-                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${subject === s
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs cursor-pointer sm:text-sm font-medium transition-all duration-200 whitespace-nowrap ${subject === s
                     ? "bg-primary text-primary-foreground"
                     : "glass-card hover:bg-secondary text-muted-foreground hover:text-foreground"
                     }`}
@@ -118,21 +118,21 @@ export default function Home() {
 
         {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 pt-6 sm:pt-8">
-          <div className="glass-card p-3 sm:p-4 text-center space-y-2">
+          <div className="glass-card p-3 sm:p-4 text-center space-y-2 hover:transition-transform hover:duration-300 hover:scale-105">
             <Zap className="w-5 sm:w-6 h-5 sm:h-6 text-primary mx-auto" />
             <h3 className="font-semibold text-xs sm:text-sm">Parallel Processing</h3>
             <p className="text-xs text-muted-foreground leading-tight">
               Query multiple AI models simultaneously
             </p>
           </div>
-          <div className="glass-card p-3 sm:p-4 text-center space-y-2">
+          <div className="glass-card p-3 sm:p-4 text-center space-y-2 hover:transition-transform hover:duration-300 hover:scale-105">
             <Sparkles className="w-5 sm:w-6 h-5 sm:h-6 text-accent mx-auto" />
             <h3 className="font-semibold text-xs sm:text-sm">Smart Formatting</h3>
             <p className="text-xs text-muted-foreground leading-tight">
               MCQ detection with crisp answers
             </p>
           </div>
-          <div className="glass-card p-3 sm:p-4 text-center space-y-2">
+          <div className="glass-card p-3 sm:p-4 text-center space-y-2 hover:transition-transform hover:duration-300 hover:scale-105">
             <Brain className="w-5 sm:w-6 h-5 sm:h-6 text-gemini mx-auto" />
             <h3 className="font-semibold text-xs sm:text-sm">Model Comparison</h3>
             <p className="text-xs text-muted-foreground leading-tight">

@@ -37,7 +37,7 @@ function Input({input,setInput,isLoading,handleSubmit,inputRef}:InputProps) {
               <button
                 onClick={handleSubmit}
                 disabled={!input.trim() || isLoading}
-                className="btn-primary-glow p-2 sm:p-3 rounded-lg sm:rounded-xl text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none self-end flex-shrink-0"
+                className={`btn-primary-glow p-2 sm:p-3 rounded-lg sm:rounded-xl text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none self-end ${isLoading?"cursor-not-allowed":"cursor-pointer"} flex-shrink-0`}
               >
                 {isLoading ? (
                   <Loader2 className="w-4 sm:w-5 h-4 sm:h-5 animate-spin" />
