@@ -1,5 +1,5 @@
 import { Loader2, Send } from 'lucide-react';
-import React, { Dispatch, RefObject, SetStateAction } from 'react'
+import React, { Dispatch, RefObject, SetStateAction, useEffect } from 'react'
 
 interface InputProps{
     input:string;
@@ -19,6 +19,13 @@ function Input({input,setInput,isLoading,handleSubmit,inputRef}:InputProps) {
         }
       };
 
+    useEffect(() => {
+      const textarea = inputRef.current;
+      if (textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = Math.min(textarea.scrollHeight, 200) + 'px';
+      }
+    }, [input, inputRef]);
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-linear-to-t from-background via-background to-transparent pt-6 sm:pt-8 pb-4 sm:pb-6 px-3 sm:px-4">
@@ -32,7 +39,7 @@ function Input({input,setInput,isLoading,handleSubmit,inputRef}:InputProps) {
                 onKeyDown={handleKeyDown}
                 placeholder="Paste your quiz question here..."
                 rows={1}
-                className="flex-1 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none min-h-[44px] sm:min-h-[48px] max-h-32"
+                className="flex-1 px-3 sm:px-4 py-2 sm:py-3 noScrollbar text-sm sm:text-base bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none resize-none min-h-[44px] sm:min-h-[48px] overflow-y-auto"
               />
               <button
                 onClick={handleSubmit}

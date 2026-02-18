@@ -145,3 +145,9 @@ body {
   }
 }
 
+
+
+.noScrollbar::-webkit-scrollbar{
+  display: none;
+}
+
