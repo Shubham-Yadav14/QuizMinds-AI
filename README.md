@@ -1,6 +1,10 @@
 # QuizMind AI 🧠⚡  
 ### Multi-Model AI Quiz Answering Platform
 
+The FastAPI backend has been migrated into the Next.js app. The quiz stream is available at `/api/answerQuiz` and the health check is available at `/api/health`.
+
+For local development, copy `.env.example` to `.env.local` and add the existing `GROQ_API_KEY` and `GEMINI_API_KEY` values. Start the app with `npm run dev`; no separate Python server is required.
+
 [Visit Website](https://answermyquiz.netlify.app/)
 
 

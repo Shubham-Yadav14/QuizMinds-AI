@@ -1,8 +1,7 @@
 export const ChatServices = {
 
     AnswerStream: async (subject: string, question: string, onData: (data: any) => void) => {
-        const baseURL = process.env.NEXT_PUBLIC_BACKEND_URL;
-        const response = await fetch(`${baseURL}/answerQuiz`, {
+        const response = await fetch('/api/answerQuiz', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
